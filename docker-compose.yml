@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+      - 510:80/tcp
+      - 511:443/tcp
+    environment:
+      TZ: Germany/Berlin
+      WEBPASSWORD: some_password
+    volumes:
+      - pihole:/etc/pihole
+      - dns:/etc/dnsmasq.d
+    restart: unless-stopped
+
+volumes:
+  pihole:
+  dns: 
